@@ -9,14 +9,12 @@ root@kali:~# python eapmd5hcgen.py test-wlan0.pcap ToPwn eap.rule
 [+] File with rule created.
 [*] Now run hashcat or oclhashcat:
 
-hashcat -m 10 --quiet --hex-salt --outfile-format 7 ToPwn /usr/share/wordlists/rockyou.txt -r eap.rule |awk -F
- '{ print $3}'|sed -e 's|\x01||'
+hashcat -m 10 --quiet --hex-salt --outfile-format 7 ToPwn /usr/share/wordlists/rockyou.txt -r eap.rule |awk -F '{ print $3}'|sed -e 's|\x01||'
 
-oclhashcat -m 10 --quiet --hex-salt --outfile-format 7 ToPwn /usr/share/wordlists/rockyou.txt -r eap.rule |awk
- -F: '{ print $3}'|sed -e 's|\x01||'
+oclhashcat -m 10 --quiet --hex-salt --outfile-format 7 ToPwn /usr/share/wordlists/rockyou.txt -r eap.rule |awk  -F: '{ print $3}'|sed -e 's|\x01||'
 
 2.- Run generated command
-root@kali:~# hashcat -m 10 --quiet --hex-salt --outfile-format 7 ToPwn /usr/share/wordlists/rockyou.txt -r eap
-.rule |awk -F: '{ print $3}'|sed -e 's|\x01||'
+root@kali:~# hashcat -m 10 --quiet --hex-salt --outfile-format 7 ToPwn /usr/share/wordlists/rockyou.txt -r eap.rule | awk -F: '{ print $3}'|sed -e 's|\x01||'
 demo12345
 
+Done.
