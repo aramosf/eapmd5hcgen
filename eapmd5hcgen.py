@@ -9,6 +9,7 @@
 # Example:
 #root@kali:~# python eapmd5hcgen.py test-wlan0.pcap ToPwn eap.rule
 #[-] EAP authentication exchange found.
+#[-] Identity (username):  SBD
 #[-] Message ID:      1
 #[-] Challenge:       f99996473c372bb3ab3dded37c128cdb
 #[-] Needed Response: 821df8d42637472a7fe9921e19758e4d
@@ -57,17 +58,21 @@ eapExist = False
 
 for packets in p:
   if packets.haslayer(EAP):
+    if packets[EAP].type == 1:
+      if packets[EAP].code == 2:
+        identity = packets[EAP].load[0:20]
     if packets[EAP].type==4:
       reqid=packets[EAP].id
       if packets[EAP].code == 1:
         reqhash[reqid]=packets[EAP].load[1:17]
         eapExist = True
         print "[-] EAP authentication exchange found."
-        print "[-] Message ID:      " + str(reqid)
-        print "[-] Challenge:       " + reqhash[reqid].encode("hex")
+	print "[-] Identity (username):  " + identity
+        print "[-] Message ID:           " + str(reqid)
+        print "[-] Challenge:            " + reqhash[reqid].encode("hex")
       if packets[EAP].code == 2:
         resphash[reqid]=packets[EAP].load[1:17]
-        print "[-] Needed Response: " + resphash[reqid].encode("hex")
+        print "[-] Needed Response:      " + resphash[reqid].encode("hex")
 
 if eapExist is False:
   print "[!] No EAP-MD5 found."
