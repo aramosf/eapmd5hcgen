@@ -1,7 +1,9 @@
+# Blog post: http://www.securitybydefault.com/2014/01/wpa2-enterprise-cracking-de-eap-md5.html
 
 1.- Run script:
 root@kali:~# python eapmd5hcgen.py test-wlan0.pcap ToPwn eap.rule
 [-] EAP authentication exchange found.
+[-] Identity (username):  SBD
 [-] Message ID:      1
 [-] Challenge:       f99996473c372bb3ab3dded37c128cdb
 [-] Needed Response: 821df8d42637472a7fe9921e19758e4d
